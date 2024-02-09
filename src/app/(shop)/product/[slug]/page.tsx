@@ -52,19 +52,23 @@ export default async function ProductsBySlugPage({ params }: Props) {
         <h1 className={`${titleFont.className} antialiased font-bold text-xl`}>
           {product.title}
         </h1>
+        {product.inStock !== 0 && (
+          <>
+            <p className="text-lg mb-5">${product.price}</p>
+            {/* Selector de Tallas */}
+            <SizeSelector
+              selectedSize={product.sizes[1]}
+              availableSizes={product.sizes}
+            />
+            {/* Selector de Cantidad */}
+            <QuantitySelector quantity={2} />
+            {/* Button*/}
+            <button className="btn-primary my-5 ">Agregar al carrito</button>
+          </>
+        )}
 
-        <p className="text-lg mb-5">{product.price}</p>
-        {/* Selector de Tallas */}
-        <SizeSelector
-          selectedSize={product.sizes[1]}
-          availableSizes={product.sizes}
-        />
-        {/* Selector de Cantidad */}
-        <QuantitySelector quantity={2} />
-        {/* Button*/}
-        <button className="btn-primary my-5">Agregar al carrito</button>
         {/* Descripción*/}
-        <h3 className="font-bold text-sm">Descripción</h3>
+        <h3 className="font-bold text-sm mt-2">Descripción</h3>
         <p className="font-light">{product.description}</p>
       </div>
     </div>
