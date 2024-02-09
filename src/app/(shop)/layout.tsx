@@ -1,5 +1,13 @@
 import { Footer, Sidebar, TopMenu } from "@/components";
 
+export const metadata = {
+  title: {
+    template: "%s - Teslo | Shop",
+    default: "Home - Teslo | Shop",
+  },
+  description: "Una tienda virtual de productos",
+};
+
 export default function ShopLayout({
   children,
 }: {

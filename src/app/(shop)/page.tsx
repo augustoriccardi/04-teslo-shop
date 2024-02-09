@@ -6,9 +6,6 @@ import { redirect } from "next/navigation";
 
 import { getPaginatedProductsWithImages } from "@/actions";
 import { Pagination, ProductGrid, Title } from "@/components";
-// import { initialData } from "@/seed/seed";
-
-// const products = initialData.products;
 
 interface Props {
   searchParams: {
@@ -29,7 +26,6 @@ export default async function Home({ searchParams }: Props) {
   return (
     <>
       <Title title="Tienda" subTitle="Todos los productos" className="mb-2" />
-
       <ProductGrid products={products} />
       <Pagination totalPages={totalPages} />
     </>
