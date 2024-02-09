@@ -4,6 +4,7 @@ import { useState } from "react";
 
 import { Swiper as SwiperObject } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
+import { Autoplay, FreeMode, Navigation, Thumbs } from "swiper/modules";
 
 import "swiper/css";
 import "swiper/css/free-mode";
@@ -11,7 +12,6 @@ import "swiper/css/navigation";
 import "swiper/css/thumbs";
 
 import "./slideshow.css";
-import { Autoplay, FreeMode, Navigation, Thumbs } from "swiper/modules";
 import Image from "next/image";
 
 interface Props {

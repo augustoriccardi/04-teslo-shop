@@ -1,5 +1,7 @@
 "use client";
 
+import Image from "next/image";
+
 // Biblioteca Swiper:
 // https://swiperjs.com/
 // https://swiperjs.com/demos
@@ -13,7 +15,6 @@ import "swiper/css/free-mode";
 import "swiper/css/pagination";
 
 import "./slideshow.css";
-import Image from "next/image";
 
 interface Props {
   images: string[];
