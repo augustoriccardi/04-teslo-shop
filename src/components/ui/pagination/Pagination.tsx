@@ -11,6 +11,8 @@ interface Props {
   totalPages: number;
 }
 
+// el total de paginas se pasan como props y se obtienen en el Home de una server action "getPaginatedProductsWithImages". Luego en este componente dependiendo de totalPages y currentPage se va a renderizar el componente según las condiciones definidas en generatePaginationNumbers guardadas en allPages. Luego se hace el map de allPages.
+
 export const Pagination = ({ totalPages }: Props) => {
   const pathname = usePathname();
   const searchParams = useSearchParams();

@@ -1,13 +1,23 @@
 "use client";
 
+import { useEffect, useState } from "react";
+
 import Link from "next/link";
 import { IoCartOutline, IoSearchOutline } from "react-icons/io5";
 
 import { titleFont } from "@/config/fonts";
-import { useUIStore } from "@/store";
+import { useCartStore, useUIStore } from "@/store";
 
 export const TopMenu = () => {
   const openSideMenu = useUIStore((state) => state.openSideMenu);
+  const totalItemsInCart = useCartStore((state) => state.getTotalItems());
+
+  // el useState y useEffect espera esta que se termine de renderizar la página para evitar el problema de hidratación o no concordancia de lo renderizado por el servidor vs cliente. Esperamos para mostar el totalItemsInCart.
+  const [loaded, setLoaded] = useState(false);
+
+  useEffect(() => {
+    setLoaded(true);
+  }, []);
 
   return (
     <nav className="flex px-5 justify-between items-center w-full">
@@ -46,12 +56,18 @@ export const TopMenu = () => {
         <Link href="/search" className="mx-2">
           <IoSearchOutline className="w-5 h-5" />
         </Link>
-        <Link href="/cart" className="mx-2">
+        <Link
+          href={totalItemsInCart === 0 && loaded ? "/empty" : "/cart"}
+          className="mx-2"
+        >
           <div className="relative">
-            <span className="absolute text-xs rounded-full px-1 font-bold -top-2 -right-2 bg-blue-700 text-white">
-              3
-            </span>
-            <IoCartOutline />
+            {loaded && totalItemsInCart > 0 && (
+              <span className="fade-in absolute text-xs rounded-full px-1 font-bold -top-2 -right-2 bg-blue-700 text-white">
+                {totalItemsInCart}
+              </span>
+            )}
+
+            <IoCartOutline size={20} />
           </div>
         </Link>
         <button
