@@ -4,12 +4,18 @@ import { z } from "zod";
 import prisma from "./lib/prisma";
 import bcryptjs from "bcryptjs";
 
-// const authenticatedRoutes = ["/cart", "/checkout"];
-// const isOnAuthenticatedRoutes = (onRoute: string) => {
-//   return authenticatedRoutes.some((authRoutes) =>
-//     onRoute.startsWith(authRoutes)
-//   );
-// };
+const authenticatedRoutes = [
+  "/cart",
+  "empty",
+  "/checkout",
+  "/profile",
+  "/orders",
+];
+const isOnAuthenticatedRoutes = (onRoute: string) => {
+  return authenticatedRoutes.some((authRoutes) =>
+    onRoute.startsWith(authRoutes)
+  );
+};
 
 export const authConfig: NextAuthConfig = {
   pages: {
@@ -21,12 +27,10 @@ export const authConfig: NextAuthConfig = {
   callbacks: {
     authorized({ auth, request: { nextUrl } }) {
       const isLoggedIn = !!auth?.user;
-      const isOnCart = nextUrl.pathname.startsWith("/cart");
-      if (isOnCart) {
+
+      if (isOnAuthenticatedRoutes(nextUrl.pathname)) {
         if (isLoggedIn) return true;
         return false; // Redirect unauthenticated users to login page
-      } else if (isLoggedIn) {
-        return Response.redirect(new URL("/", nextUrl));
       }
       return true;
     },

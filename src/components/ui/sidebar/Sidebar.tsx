@@ -78,7 +78,8 @@ export const Sidebar = () => {
               <span className="ml-3 text-xl">Perfil</span>
             </Link>
             <Link
-              href="/"
+              onClick={() => closeSideMenu()}
+              href="/orders"
               className="flex items-center mt-10 p-2 hover:bg-gray-100 rounded transition-all"
             >
               <IoTicketOutline size={30} />
@@ -88,6 +89,7 @@ export const Sidebar = () => {
         )}
         {!isAuthenticated && (
           <Link
+            onClick={() => closeSideMenu()}
             href="/auth/login"
             className="flex items-center mt-10 p-2 hover:bg-gray-100 rounded transition-all"
           >
@@ -111,6 +113,7 @@ export const Sidebar = () => {
             {/* Line Separator */}
             <div className="w-full h-px bg-gray-200 my-10" />
             <Link
+              onClick={() => closeSideMenu()}
               href="/"
               className="flex items-center mt-10 p-2 hover:bg-gray-100 rounded transition-all"
             >
@@ -119,7 +122,8 @@ export const Sidebar = () => {
             </Link>
 
             <Link
-              href="/"
+              onClick={() => closeSideMenu()}
+              href="/orders"
               className="flex items-center mt-10 p-2 hover:bg-gray-100 rounded transition-all"
             >
               <IoTicketOutline size={30} />
@@ -127,6 +131,7 @@ export const Sidebar = () => {
             </Link>
 
             <Link
+              onClick={() => closeSideMenu()}
               href="/"
               className="flex items-center mt-10 p-2 hover:bg-gray-100 rounded transition-all"
             >
