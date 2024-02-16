@@ -92,7 +92,7 @@ export const PlaceOrder = () => {
 
         <span className="mt-5 text-2xl">Total:</span>
         <span className="mt-5 text-2xl text-right">
-          $ {currencyFormat(total)}
+          {currencyFormat(total)}
         </span>
       </div>
 

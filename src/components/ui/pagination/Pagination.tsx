@@ -32,9 +32,10 @@ export const Pagination = ({ totalPages }: Props) => {
   // dependiendo de la página actual y el total de páginas me devuelve un array  de números y/o puntos suspensivos para mostrar en los botones del paginador
   const allPages = generatePaginationNumbers(currentPage, totalPages);
 
-  // Se construye la url con el pathname (/) y la variable params que la lee de los searchParams
+  // Se construye la url con el pathname (ej: "/") y la variable params que la lee de los searchParams
   const createPageUrl = (pageNumber: number | string) => {
     const params = new URLSearchParams(searchParams);
+
     if (pageNumber === "...") {
       return `${pathname}?${params.toString()}`;
     }

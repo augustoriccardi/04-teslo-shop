@@ -30,9 +30,7 @@ export const OrderSummary = () => {
       <span className="text-right">{currencyFormat(tax)}</span>
 
       <span className="mt-5 text-2xl">Total:</span>
-      <span className="mt-5 text-2xl text-right">
-        $ {currencyFormat(total)}
-      </span>
+      <span className="mt-5 text-2xl text-right">{currencyFormat(total)}</span>
     </>
   );
 };
