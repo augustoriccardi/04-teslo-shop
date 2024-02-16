@@ -6,6 +6,7 @@ import prisma from "../../lib/prisma";
 export const setUserAddress = async (address: Address, userId: string) => {
   try {
     const newAddress = await createOrReplaceAddress(address, userId);
+
     return {
       ok: true,
       address: newAddress,

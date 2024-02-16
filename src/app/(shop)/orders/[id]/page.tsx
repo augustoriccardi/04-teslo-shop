@@ -63,8 +63,6 @@ export default function OrdersById({ params }: Props) {
                   <p>{product.title}</p>
                   <p>${product.price}</p>
                   <p className="font-bold">Subtotal: ${product.price * 3}</p>
-
-                  <button className="underline mt-3">Remover</button>
                 </div>
               </div>
             ))}

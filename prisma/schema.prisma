@@ -152,6 +152,6 @@ model OrderAddress {
   country   Country @relation(fields: [countryId], references: [id])
   countryId String
 
-  Order   Order  @relation(fields: [orderId], references: [id])
+  order   Order  @relation(fields: [orderId], references: [id])
   orderId String @unique
 }
