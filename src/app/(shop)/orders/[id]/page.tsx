@@ -7,6 +7,7 @@ import { getOrderById } from "@/actions";
 import { redirect } from "next/navigation";
 import { currencyFormat } from "@/utils/currecncyFormat";
 import OrderIdErrorPage from "./error";
+import { PayPalButton } from "@/components/paypal/PayPalButton";
 
 interface Props {
   params: {
@@ -34,7 +35,7 @@ export default async function OrdersById({ params }: Props) {
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-10">
           {/* Carrito */}
           <div className="flex flex-col mt-5">
-            <IsPaidFlag order={order} />
+            <IsPaidFlag isPaid={order?.isPaid ?? false} />
 
             {/* Items */}
             {order!.OrderItem.map((item) => (
@@ -98,8 +99,11 @@ export default async function OrdersById({ params }: Props) {
               <span className="mt-5 text-2xl">Total:</span>
               <span className="mt-5 text-2xl text-right">$ {order?.total}</span>
             </div>
-
-            <IsPaidFlag order={order} />
+            {order?.isPaid ? (
+              <IsPaidFlag isPaid={order?.isPaid ?? false} />
+            ) : (
+              <PayPalButton amount={order!.total} orderId={order!.id} />
+            )}
           </div>
         </div>
       </div>
