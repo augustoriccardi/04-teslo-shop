@@ -21,7 +21,7 @@ export default function BuyLayout({ children }: { children: React.ReactNode }) {
     if (itemsInCart === 0 && loaded === true) {
       router.replace("/");
     }
-  }, [itemsInCart, loaded]);
+  }, [itemsInCart, loaded, router]);
 
   if (!loaded) return <p>Loading...</p>;
 

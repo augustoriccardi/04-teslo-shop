@@ -5,7 +5,7 @@ export const revalidate = 3.154e7; // revalidate at most every year
 import clsx from "clsx";
 import { useForm } from "react-hook-form";
 
-import type { Address, Country } from "@/interfaces";
+import type { Country, UserAddress } from "@/interfaces";
 import { useAddressStore } from "@/store";
 import { useEffect } from "react";
 import { setUserAddress, deleteUserAddress } from "@/actions";
@@ -26,10 +26,17 @@ type FormInputs = {
 
 interface Props {
   countries: Country[];
-  userStoredAddress?: Partial<Address>;
+  userDbAddress?: Partial<UserAddress>;
 }
 
-export const AdressForm = ({ countries, userStoredAddress = {} }: Props) => {
+export const AdressForm = ({ countries, userDbAddress = {} }: Props) => {
+  const {
+    id, // No se usará
+    userId, // No se usará
+    countryId: country,
+    ...restUserDbAddress
+  } = userDbAddress;
+
   const {
     handleSubmit,
     register,
@@ -37,7 +44,7 @@ export const AdressForm = ({ countries, userStoredAddress = {} }: Props) => {
     reset,
   } = useForm<FormInputs>({
     defaultValues: {
-      ...(userStoredAddress as any),
+      ...restUserDbAddress,
       rememberAddress: false,
     },
   });
@@ -56,7 +63,7 @@ export const AdressForm = ({ countries, userStoredAddress = {} }: Props) => {
     if (address.firstName) {
       reset(address);
     }
-  }, []);
+  });
 
   const onSubmit = async (data: FormInputs) => {
     const { rememberAddress, ...restAddress } = data;

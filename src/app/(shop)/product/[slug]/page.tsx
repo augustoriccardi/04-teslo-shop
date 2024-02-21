@@ -8,14 +8,11 @@ import { notFound } from "next/navigation";
 import {
   ProductMobileSlideShow,
   ProductSlideShow,
-  QuantitySelector,
-  SizeSelector,
   StockLabel,
 } from "@/components";
 import { titleFont } from "@/config/fonts";
 import { getProductBySlug } from "@/actions";
 import { AddToCart } from "./ui/AddToCart";
-import { Product } from "../../../../interfaces/product.interface";
 
 interface Props {
   params: {
@@ -52,7 +49,7 @@ export default async function ProductsBySlugPage({ params }: Props) {
   const { slug } = params;
   const product = await getProductBySlug(slug);
 
-  if (!product) {
+  if (!product || !product.withImages) {
     return notFound();
   }
 

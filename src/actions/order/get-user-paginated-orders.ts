@@ -8,7 +8,7 @@ interface PaginationOptions {
   take?: number;
 }
 
-export const getOrdersPagination = async ({
+export const getUserPaginatedOrders = async ({
   page = 1,
   take = 12,
 }: PaginationOptions) => {
@@ -24,7 +24,7 @@ export const getOrdersPagination = async ({
       take: take,
       skip: (page - 1) * take,
       orderBy: {
-        createdAt: "asc",
+        createdAt: "desc",
       },
       where: {
         userId: session?.user.id,

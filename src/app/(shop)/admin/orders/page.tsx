@@ -1,6 +1,6 @@
 export const revalidate = 0;
 
-import { getUserPaginatedOrders } from "@/actions";
+import { getAdminPaginatedOrders } from "@/actions";
 // https://tailwindcomponents.com/component/hoverable-table
 
 import { Pagination, Title } from "@/components";
@@ -9,13 +9,14 @@ import clsx from "clsx";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import { IoCardOutline } from "react-icons/io5";
+
 interface Props {
   searchParams: {
     page?: string;
   };
 }
 
-export default async function OrdersPage({ searchParams }: Props) {
+export default async function AdminOrdersPage({ searchParams }: Props) {
   const page = searchParams.page ? parseInt(searchParams.page as string) : 1;
 
   const {
@@ -23,7 +24,7 @@ export default async function OrdersPage({ searchParams }: Props) {
     currentPage,
     totalPages,
     orders = [],
-  } = await getUserPaginatedOrders({ page });
+  } = await getAdminPaginatedOrders({ page });
 
   if (!ok) {
     redirect("/auth/login");
@@ -31,7 +32,7 @@ export default async function OrdersPage({ searchParams }: Props) {
 
   return (
     <>
-      <Title title="Orders" />
+      <Title title="Todas las ordenes" />
 
       <div className="mb-10">
         <table className="min-w-full">
@@ -48,6 +49,24 @@ export default async function OrdersPage({ searchParams }: Props) {
                 className="text-sm font-medium text-gray-900 px-6 py-4 text-left"
               >
                 Nombre completo
+              </th>
+              <th
+                scope="col"
+                className="text-sm font-medium text-gray-900 px-6 py-4 text-left"
+              >
+                Teléfono
+              </th>
+              <th
+                scope="col"
+                className="text-sm font-medium text-gray-900 px-6 py-4 text-left"
+              >
+                Dirección de entrega
+              </th>
+              <th
+                scope="col"
+                className="text-sm font-medium text-gray-900 px-6 py-4 text-left"
+              >
+                Ciudad
               </th>
               <th
                 scope="col"
@@ -75,6 +94,15 @@ export default async function OrdersPage({ searchParams }: Props) {
                 <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
                   {`  ${order.OrderAddress?.firstName}
                  ${order.OrderAddress?.lastName}`}
+                </td>
+                <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                  {order.OrderAddress?.phone}
+                </td>
+                <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                  {order.OrderAddress?.address}
+                </td>
+                <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                  {order.OrderAddress?.city}
                 </td>
                 <td className="flex items-center text-sm  text-gray-900 font-light px-6 py-4 whitespace-nowrap">
                   <IoCardOutline

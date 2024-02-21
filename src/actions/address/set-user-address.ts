@@ -44,13 +44,13 @@ const createOrReplaceAddress = async (address: Address, userId: string) => {
       return newAddress;
     }
 
-    const updateAdress = await prisma.userAddress.update({
+    const updateAddress = await prisma.userAddress.update({
       where: {
         userId,
       },
       data: addressToSave,
     });
-    return updateAdress;
+    return updateAddress;
   } catch (error) {
     console.log(error);
     throw new Error("No se pudo grabar la dirección");

@@ -10,6 +10,7 @@ const authenticatedRoutes = [
   "/checkout",
   "/profile",
   "/orders",
+  "/admin",
 ];
 const isOnAuthenticatedRoutes = (onRoute: string) => {
   return authenticatedRoutes.some((authRoutes) =>

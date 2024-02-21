@@ -33,6 +33,13 @@ export const getPaginatedProductsWithImages = async ({
       //! Por género
       where: {
         gender: gender,
+        // ProductImage: {
+        //   some: {
+        //     url: {
+        //       not: "",
+        //     },
+        //   },
+        // },
       },
     });
 

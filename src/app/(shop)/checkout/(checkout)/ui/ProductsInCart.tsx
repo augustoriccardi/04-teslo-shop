@@ -3,9 +3,9 @@
 import { useEffect, useState } from "react";
 
 import { useCartStore } from "@/store";
-import Image from "next/image";
 
 import { currencyFormat } from "@/utils/currecncyFormat";
+import { ProductImage } from "@/components";
 
 export const ProductsInCart = () => {
   const [loaded, setLoaded] = useState(false);
@@ -13,7 +13,7 @@ export const ProductsInCart = () => {
 
   useEffect(() => {
     setLoaded(true);
-  });
+  }, []);
 
   if (!loaded) {
     return <p>Loading...</p>;
@@ -23,8 +23,8 @@ export const ProductsInCart = () => {
     <>
       {productsInCart.map((product) => (
         <div key={`${product.slug}-${product.size}`} className="flex mb-5">
-          <Image
-            src={`/products/${product.image}`}
+          <ProductImage
+            src={product.image}
             width={100}
             height={100}
             style={{

@@ -13,7 +13,7 @@ export const LoginForm = () => {
   useEffect(() => {
     if (errorMessage) {
       // redireccionar
-      window.location.replace("/");
+      // window.location.replace("/");
     }
   }, [errorMessage]);
 

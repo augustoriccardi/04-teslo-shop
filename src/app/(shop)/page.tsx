@@ -20,6 +20,10 @@ export default async function Home({ searchParams }: Props) {
   const { products, currentPage, totalPages } =
     await getPaginatedProductsWithImages({ page });
 
+  const productsWithImages = products.filter(
+    (product) => product.ProductImage.length !== 0 // Podría ser también que la condición sea product.ProductImage.length >=2
+  );
+
   if (products.length === 0) {
     redirect("/");
   }
@@ -27,7 +31,7 @@ export default async function Home({ searchParams }: Props) {
   return (
     <>
       <Title title="Tienda" subTitle="Todos los productos" className="mb-2" />
-      <ProductGrid products={products} />
+      <ProductGrid products={productsWithImages} />
       <Pagination totalPages={totalPages} />
     </>
   );
