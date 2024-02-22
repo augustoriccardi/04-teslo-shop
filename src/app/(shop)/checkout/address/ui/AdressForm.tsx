@@ -2,15 +2,15 @@
 
 export const revalidate = 3.154e7; // revalidate at most every year
 
-import clsx from "clsx";
+import { useEffect } from "react";
+import { useRouter } from "next/navigation";
+import { useSession } from "next-auth/react";
 import { useForm } from "react-hook-form";
+import clsx from "clsx";
 
 import type { Country, UserAddress } from "@/interfaces";
 import { useAddressStore } from "@/store";
-import { useEffect } from "react";
 import { setUserAddress, deleteUserAddress } from "@/actions";
-import { useSession } from "next-auth/react";
-import { useRouter } from "next/navigation";
 
 type FormInputs = {
   firstName: string;
@@ -36,6 +36,7 @@ export const AdressForm = ({ countries, userDbAddress = {} }: Props) => {
     countryId: country,
     ...restUserDbAddress
   } = userDbAddress;
+  const router = useRouter();
 
   const {
     handleSubmit,
@@ -48,8 +49,6 @@ export const AdressForm = ({ countries, userDbAddress = {} }: Props) => {
       rememberAddress: false,
     },
   });
-
-  const router = useRouter();
 
   const setAddress = useAddressStore((state) => state.setAddress);
   const address = useAddressStore((state) => state.address);
