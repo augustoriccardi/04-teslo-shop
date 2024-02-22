@@ -33,6 +33,12 @@ export async function generateMetadata(
   // optionally access and extend (rather than replace) parent metadata
   // const previousImages = (await parent).openGraph?.images || []
 
+  const localSrc = product?.images[1]
+    ? product?.images[1].startsWith("http") // comprueba  si la imagen es remota o local
+      ? product?.images[1] // si es remota  utiliza directamente la url de la imagen
+      : `/products/${product?.images[1]}` // Si es local  concatena el nombre del archivo con la ruta base de las imágenes
+    : "/imgs/placeholder.jpg"; // si no existe  una imagen en el servidor se usa una placeholder
+
   return {
     title: product?.title ?? "Producto no encontrado",
     description: product?.description ?? "",
@@ -40,7 +46,7 @@ export async function generateMetadata(
       title: product?.title ?? "Producto no encontrado",
       description: product?.description ?? "",
       // images: [], // https://msitioweb.com/products/image.png
-      images: [`/products/${product?.images[1]}`],
+      images: [localSrc],
     },
   };
 }
