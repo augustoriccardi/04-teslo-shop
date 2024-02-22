@@ -12,3 +12,8 @@
 8. Correr el proyecto `npm run dev`
 
 ## Correr en prod
+
+1. En Vercel ir a Storage y crear una Postgres DB. En el acrvhivo .env colocar crear variable DATABASE_URL, pegar el string de conexión (psql)
+2. `npx prisma migrate deploy`, para subir los modelos a Prisma Cloud.
+3. `npm run seed` para crear los seeds de producción.
+4.
