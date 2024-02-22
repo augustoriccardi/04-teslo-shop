@@ -39,11 +39,18 @@ export async function generateMetadata(
     openGraph: {
       title: product?.title ?? "Producto no encontrado",
       description: product?.description ?? "",
+      url: "/",
+      siteName: "Teslo Shop",
       // images: [], // https://msitioweb.com/products/image.png
       images: [
-        product?.images[1]?.startsWith("http")
-          ? product?.images[1]
-          : `/products/${product?.images[1]}`,
+        {
+          url: product?.images[1]?.startsWith("http")
+            ? product?.images[1]
+            : `/products/${product?.images[1]}`,
+          width: 100,
+          height: 100,
+          alt: `${product?.title} - openGraph image `,
+        },
       ],
     },
   };
