@@ -39,7 +39,7 @@ export async function generateMetadata(
     openGraph: {
       title: product?.title ?? "Producto no encontrado",
       description: product?.description ?? "",
-      url: "/",
+      url: "https://nextjs-tienda-ariccardi.vercel.app",
       siteName: "Teslo Shop",
       // images: [], // https://msitioweb.com/products/image.png
       images: [
