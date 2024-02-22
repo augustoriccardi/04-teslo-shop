@@ -41,7 +41,6 @@ export async function generateMetadata(
       description: product?.description ?? "",
       url: "https://nextjs-tienda-ariccardi.vercel.app",
       siteName: "Teslo Shop",
-      // images: [], // https://msitioweb.com/products/image.png
       images: [
         {
           url: product?.images[1]?.startsWith("http")
@@ -49,7 +48,7 @@ export async function generateMetadata(
             : `/products/${product?.images[1]}`,
           width: 100,
           height: 100,
-          alt: `${product?.title} - openGraph image `,
+          alt: `${product?.title}`,
         },
       ],
     },
