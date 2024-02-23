@@ -2,7 +2,7 @@ import { Title } from "@/components";
 import { AdressForm } from "./ui/AdressForm";
 
 import { getCountries, getUserAddress } from "@/actions";
-import { auth } from "@/auth.config";
+import { auth } from "@/auth";
 
 export default async function AdressPage() {
   const countries = await getCountries();

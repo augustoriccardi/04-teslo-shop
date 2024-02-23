@@ -1,6 +1,6 @@
 "use server";
 
-import { signIn } from "@/auth.config";
+import { signIn } from "@/auth";
 import { AuthError } from "next-auth";
 
 // ...
@@ -10,14 +10,18 @@ export async function authenticate(
   formData: FormData
 ) {
   try {
-    await signIn("credentials", formData);
+    await signIn("credentials", {
+      ...Object.fromEntries(formData),
+      redirect: false,
+    });
+    return "Success";
   } catch (error) {
     if (error instanceof AuthError) {
       switch (error.type) {
         case "CredentialsSignin":
           return "Credenciales no son correctas.";
         default:
-          return "Algo  salió mal. Por favor intentalo de nuevo más tarde.";
+          return "Algo salió mal. Por favor intentalo de nuevo más tarde.";
       }
     }
     throw error;
