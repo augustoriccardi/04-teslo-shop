@@ -75,6 +75,7 @@ async function main() {
     });
   });
 
+  console.log(products);
   //Países
 
   await prisma.country.createMany({

@@ -2,6 +2,7 @@
 
 import { useSession } from "next-auth/react";
 import Image from "next/image";
+import { titleFont } from "@/config/fonts";
 
 export const AvatarImage = () => {
   const { data: session } = useSession();
@@ -16,9 +17,10 @@ export const AvatarImage = () => {
     <>
       {session?.user.name && (
         <div className="relative hidden lg:block fade-in">
-          <div className="flex items-center absolute right-60">
-            <span className="m-2 p-2 italic">
-              Hi, {session?.user.name.split(" ")[0]}!
+          <div className="flex items-center absolute right-64">
+            <span className={`  m-2 p-2 ${titleFont.className} `}>
+              {` ${session?.user.name.split(" ")[0]} 
+              ${session?.user.name.split(" ")[1]}`}
             </span>
             {session?.user.image ? (
               <Image

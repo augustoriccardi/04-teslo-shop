@@ -25,7 +25,7 @@ export const PlaceOrder = () => {
 
   useEffect(() => {
     setLoaded(true);
-  }, []);
+  }, [cart]);
 
   const onPlaceOrder = async () => {
     setIsPlacingOrder(true);

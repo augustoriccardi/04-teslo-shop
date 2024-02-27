@@ -48,7 +48,8 @@ export const Pagination = ({ totalPages }: Props) => {
       return `${pathname}?${params.toString()}`;
     }
 
-    params.set("page", pageNumber.toString());
+    params.set("page", pageNumber.toString()); // console.log(`${pathname}?${params.toString()}`); ///gender/women?page=2
+
     return `${pathname}?${params.toString()}`;
   };
 

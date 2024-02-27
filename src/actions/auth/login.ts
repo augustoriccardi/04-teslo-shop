@@ -1,30 +1,68 @@
 "use server";
 
 import { signIn } from "@/auth";
-import { AuthError } from "next-auth";
+import { UserSchema } from "@/utils";
 
-// ...
+interface Fields {
+  email: string;
+  password: string;
+}
+
+interface FormState {
+  message: string;
+  errors: Record<keyof Fields, string> | undefined;
+  fieldValues: Fields;
+}
 
 export async function authenticate(
-  prevState: string | undefined,
+  prevState: FormState,
   formData: FormData
-) {
+): Promise<FormState> {
+  const email = formData.get("email") as string;
+  const password = formData.get("password") as string;
+
   try {
+    const result = UserSchema.safeParse({
+      email: email,
+      password: password,
+    });
+    if (!result.success) {
+      const errorMap = result.error.flatten().fieldErrors;
+      return {
+        message: "error formulario",
+        errors: {
+          email: errorMap["email"]?.[0] ?? "",
+          password: errorMap["password"]?.[0] ?? "",
+        },
+        fieldValues: {
+          email,
+          password,
+        },
+      };
+    }
+
     await signIn("credentials", {
       ...Object.fromEntries(formData),
       redirect: false,
     });
-    return "Success";
+
+    return {
+      message: "success",
+      errors: undefined,
+      fieldValues: {
+        email: "",
+        password: "",
+      },
+    };
   } catch (error) {
-    if (error instanceof AuthError) {
-      switch (error.type) {
-        case "CredentialsSignin":
-          return "Credenciales no son correctas.";
-        default:
-          return "Algo salió mal. Por favor intentalo de nuevo más tarde.";
-      }
-    }
-    throw error;
+    return {
+      message: "error credenciales",
+      errors: undefined,
+      fieldValues: {
+        email: "",
+        password: "",
+      },
+    };
   }
 }
 

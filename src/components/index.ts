@@ -20,3 +20,5 @@ export * from "./ui/top-menu/TopMenu";
 export * from "./ui/top-menu/AvatarImage";
 
 export * from "./order/IsPaidFlag";
+
+export * from "./ui/search/SearchComponent";

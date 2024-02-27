@@ -49,8 +49,23 @@ export const createUpdateProduct = async (formData: FormData) => {
         .split(",")
         .map((tag) => tag.trim().toLocaleLowerCase());
 
+      const imagesFormData = formData.getAll("images");
+
       if (id) {
-        //Actualizar
+        // Actualizar producto
+        const imagesDB = await prisma.productImage.findMany({
+          where: { productId: id },
+        });
+
+        const totalImages = imagesFormData.length + imagesDB.length;
+
+        if (totalImages < 2) {
+          console.log("entro");
+          throw new Error(
+            "No se pudo actualizar el producto. Debe cargar un mínimo de 2 imágenes."
+          );
+        }
+
         product = await prisma.product.update({
           where: { id },
           data: {
@@ -66,7 +81,14 @@ export const createUpdateProduct = async (formData: FormData) => {
 
         console.log({ updatedProduct: product });
       } else {
-        //Crear
+        // Crear producto
+        if (imagesFormData.length < 2) {
+          console.log("entro");
+          throw new Error(
+            "No se pudo guardar el producto. Debe cargar un mínimo de 2 imágenes."
+          );
+        }
+
         product = await prisma.product.create({
           data: {
             ...rest,
@@ -76,13 +98,10 @@ export const createUpdateProduct = async (formData: FormData) => {
             },
           },
         });
-      }
 
-      //Proceso de carga y guardado de imágenes
-      // Recorrer las imágenes y guardarlas
-      if (formData.getAll("images")) {
-        // [https://url1.jpg, https://url2.jpg]
-        const images = await uploadImages(formData.getAll("images") as File[]);
+        // Proceso de carga y guardado de imágenes
+        // Recorrer las imágenes y guardarlas
+        const images = await uploadImages(imagesFormData as File[]);
 
         if (!images) {
           throw new Error("No se pudo cargar las imágenes, rollingback");
@@ -112,7 +131,7 @@ export const createUpdateProduct = async (formData: FormData) => {
   } catch (error) {
     return {
       ok: false,
-      message: "Revisar los logs, no se pudo actualizar/crear",
+      message: (error as Error).message,
     };
   }
 };
@@ -125,7 +144,9 @@ const uploadImages = async (images: File[]) => {
         const base64Image = Buffer.from(buffer).toString("base64");
 
         return cloudinary.uploader
-          .upload(`data:image/png;base64,${base64Image}`)
+          .upload(`data:image/png;base64,${base64Image}`, {
+            folder: "nextjs-teslo-shop",
+          })
           .then((r) => r.secure_url);
       } catch (error) {
         console.log(error);

@@ -8,6 +8,7 @@ import { redirect } from "next/navigation";
 import { currencyFormat } from "@/utils/currecncyFormat";
 import OrderIdErrorPage from "./error";
 import { PayPalButton } from "@/components/paypal/PayPalButton";
+import Link from "next/link";
 
 interface Props {
   params: {
@@ -99,11 +100,19 @@ export default async function OrdersById({ params }: Props) {
               <span className="mt-5 text-2xl">Total:</span>
               <span className="mt-5 text-2xl text-right">$ {order?.total}</span>
             </div>
+
             {order?.isPaid ? (
               <IsPaidFlag isPaid={order?.isPaid ?? false} />
             ) : (
               <PayPalButton amount={order!.total} orderId={order!.id} />
             )}
+
+            <Link
+              className="underline flex justify-end text-blue-600"
+              href={"/"}
+            >
+              Continuar comprando →
+            </Link>
           </div>
         </div>
       </div>
