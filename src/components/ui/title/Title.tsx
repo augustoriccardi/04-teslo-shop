@@ -10,7 +10,7 @@ export const Title = ({ title, subTitle, className }: Props) => {
   return (
     <div className={`fade-in mt-3 ${className}`}>
       <h1
-        className={`${titleFont.className} antialiased text-4xl font-semibold my-7`}
+        className={`${titleFont.className} antialiased text-4xl font-semibold my-9`}
       >
         {title}
       </h1>

@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import { ProductImage, QuantitySelector } from "@/components";
 import { useCartStore } from "@/store";
 import Link from "next/link";
-import { currencyFormat } from "../../../../utils/currecncyFormat";
+import { currencyFormat } from "../../../../utils/currencyFormat";
 
 export const ProductsInCart = () => {
   const updateProductQuantity = useCartStore(

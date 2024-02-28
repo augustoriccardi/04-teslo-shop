@@ -9,6 +9,7 @@ interface Props {
   };
   searchParams: {
     page?: string;
+    search?: string;
   };
 }
 
@@ -26,9 +27,14 @@ export const revalidate = 60;
 export default async function GenderByPage({ searchParams, params }: Props) {
   const { gender } = params;
   const page = searchParams.page ? parseInt(searchParams.page as string) : 1;
+  const search = searchParams.search;
 
   const { products, currentPage, totalPages } =
-    await getPaginatedProductsWithImages({ page, gender: gender as Gender });
+    await getPaginatedProductsWithImages({
+      page,
+      gender: gender as Gender,
+      search,
+    });
 
   if (products.length === 0) {
     redirect(`/gender/${gender}`);

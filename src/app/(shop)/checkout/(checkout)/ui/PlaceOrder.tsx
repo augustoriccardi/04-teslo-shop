@@ -5,7 +5,7 @@ import clsx from "clsx";
 
 import { placeOrder } from "@/actions";
 import { useAddressStore, useCartStore } from "@/store";
-import { currencyFormat } from "@/utils/currecncyFormat";
+import { currencyFormat } from "@/utils/currencyFormat";
 import { useRouter } from "next/navigation";
 
 export const PlaceOrder = () => {

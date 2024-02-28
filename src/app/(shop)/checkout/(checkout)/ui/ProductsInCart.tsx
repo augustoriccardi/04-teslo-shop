@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 
 import { useCartStore } from "@/store";
 
-import { currencyFormat } from "@/utils/currecncyFormat";
+import { currencyFormat } from "@/utils/currencyFormat";
 import { ProductImage } from "@/components";
 
 export const ProductsInCart = () => {

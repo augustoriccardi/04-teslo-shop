@@ -1,7 +1,7 @@
 "use client";
 
 import { useCartStore } from "@/store";
-import { currencyFormat } from "@/utils/currecncyFormat";
+import { currencyFormat } from "@/utils/currencyFormat";
 import { useEffect, useState } from "react";
 
 export const OrderSummary = () => {

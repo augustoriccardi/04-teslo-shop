@@ -18,17 +18,14 @@ export const SearchComponent = () => {
         return router.push(`${pathname}`);
       }
 
-      router.push(`/?search=${searchTerm}`);
+      router.push(`${pathname}?search=${searchTerm}`);
     }, 1000);
 
     return () => clearTimeout(delayDebounceFn);
-  }, [searchTerm, router, pathname]);
+  }, [searchTerm, router]);
 
   useEffect(() => {
-    if (!pathname.startsWith("/?search")) {
-      setIsSearchOpen(false);
-      setSearchTerm("");
-    }
+    setIsSearchOpen(false);
   }, [pathname]);
 
   const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -38,19 +35,18 @@ export const SearchComponent = () => {
   };
 
   return (
-    <div className="absolute z-10">
+    <div className="relative -left-5 -top-3 z-10">
       <button
         onClick={() => setIsSearchOpen(!isSearchOpen)}
         className={clsx("transition-all ", {
-          "relative -left-3": !isSearchOpen,
-          "relative -translate-x-[170px] z-10 translate-y-[100px]":
-            isSearchOpen,
+          absolute: !isSearchOpen,
+          "absolute -translate-x-[154px] z-10 translate-y-[49px]": isSearchOpen,
         })}
       >
         <IoSearchOutline size={20} />
       </button>
 
-      <div className="relative top-16 -left-44">
+      <div className="absolute top-10 -left-40">
         {isSearchOpen && (
           <input
             type="text"

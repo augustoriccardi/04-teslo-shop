@@ -5,7 +5,7 @@ import { IoCardOutline } from "react-icons/io5";
 import clsx from "clsx";
 import { getOrderById } from "@/actions";
 import { redirect } from "next/navigation";
-import { currencyFormat } from "@/utils/currecncyFormat";
+import { currencyFormat } from "@/utils/currencyFormat";
 import OrderIdErrorPage from "./error";
 import { PayPalButton } from "@/components/paypal/PayPalButton";
 import Link from "next/link";

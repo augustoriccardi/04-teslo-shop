@@ -11,10 +11,12 @@ import { useCartStore, useUIStore } from "@/store";
 import { AvatarImage } from "@/components";
 
 import { SearchComponent } from "../search/SearchComponent";
+import { usePathname } from "next/navigation";
 
 export const TopMenu = () => {
   const openSideMenu = useUIStore((state) => state.openSideMenu);
   const totalItemsInCart = useCartStore((state) => state.getTotalItems());
+  const pathname = usePathname();
 
   // el useState y useEffect espera esta que se termine de renderizar la página para evitar el problema de hidratación o no concordancia de lo renderizado por el servidor vs cliente. Esperamos para mostar el totalItemsInCart.
   const [loaded, setLoaded] = useState(false);
@@ -60,15 +62,18 @@ export const TopMenu = () => {
         {/* Search, Cart, Menu */}
 
         <div className="flex items-center">
-          <SearchComponent />
-          <div className="ms-3 flex items-center">
+          {(pathname === "/" || pathname.startsWith("/gender")) && (
+            <SearchComponent />
+          )}
+
+          <div className="flex items-center">
             <Link
               href={totalItemsInCart === 0 && loaded ? "/empty" : "/cart"}
               className="mx-2"
             >
               <div className="relative">
                 {loaded && totalItemsInCart > 0 && (
-                  <span className="fade-in absolute text-xs rounded-full px-1 font-bold -top-2 -right-2 bg-blue-700 text-white">
+                  <span className="fade-in absolute text-xs rounded-full px-1 font-bold -top-2 -right-2 bg-blue-700 text-white w-4 h-4 flex justify-center items-center">
                     {totalItemsInCart}
                   </span>
                 )}

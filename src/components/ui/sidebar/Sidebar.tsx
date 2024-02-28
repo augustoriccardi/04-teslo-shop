@@ -68,16 +68,15 @@ export const Sidebar = () => {
         </div> */}
         {/* Menú */}
 
-        <h1
-          className={`${titleFont.className} antialiased text-lg font-semibold my-7`}
-        >
-          Panel de usuario
-        </h1>
-        {/* Line Separator */}
-        <div className="w-full h-px bg-gray-200 " />
-
         {isAuthenticated && (
           <>
+            <h1
+              className={`${titleFont.className} antialiased text-lg font-semibold my-6`}
+            >
+              Panel de usuario
+            </h1>
+            {/* Line Separator */}
+            <div className="w-full h-px bg-gray-200 " />
             <Link
               href="/profile"
               onClick={() => closeSideMenu()}
@@ -120,7 +119,7 @@ export const Sidebar = () => {
         {isAdmin && (
           <>
             <h1
-              className={`${titleFont.className} antialiased text-lg font-semibold my-7`}
+              className={`${titleFont.className} antialiased text-lg font-semibold my-6`}
             >
               Panel de Admin
             </h1>

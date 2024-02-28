@@ -17,7 +17,7 @@ export const AvatarImage = () => {
     <>
       {session?.user.name && (
         <div className="relative hidden lg:block fade-in">
-          <div className="flex items-center absolute right-64">
+          <div className="flex items-center justify-center absolute right-64">
             <span className={`  m-2 p-2 ${titleFont.className} `}>
               {` ${session?.user.name.split(" ")[0]} 
               ${session?.user.name.split(" ")[1]}`}
