@@ -22,7 +22,7 @@ export const getPaginatedProductsWithImages = async ({
   const where = {
     gender: gender,
     title: {
-      contains: search || "",
+      contains: search,
       mode: "insensitive",
     },
   };

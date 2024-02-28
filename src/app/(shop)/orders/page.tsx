@@ -30,7 +30,7 @@ export default async function OrdersPage({ searchParams }: Props) {
   }
 
   return (
-    <>
+    <div className="">
       <Title title="Orders" />
 
       <div className="mb-10">
@@ -104,6 +104,6 @@ export default async function OrdersPage({ searchParams }: Props) {
         </table>
         <Pagination totalPages={totalPages as number} />
       </div>
-    </>
+    </div>
   );
 }

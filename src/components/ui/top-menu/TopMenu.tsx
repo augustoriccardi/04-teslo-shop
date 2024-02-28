@@ -62,17 +62,16 @@ export const TopMenu = () => {
         </div>
         {/* Search, Cart, Menu */}
 
-        <div className="flex items-center">
-          <div>
-            {(pathname === "/" || pathname.startsWith("/gender")) && (
-              <button
-                onClick={() => setIsSearchOpen(!isSearchOpen)}
-                className="z-200"
-              >
-                <IoSearchOutline size={20} />
-              </button>
-            )}
-          </div>
+        <div className="flex items-center justify-center">
+          {(pathname === "/" || pathname.startsWith("/gender")) && (
+            <button
+              onClick={() => setIsSearchOpen(!isSearchOpen)}
+              className="z-200"
+            >
+              <IoSearchOutline size={20} />
+            </button>
+          )}
+
           {isSearchOpen && (
             <SearchComponent
               isSearchOpen={isSearchOpen}

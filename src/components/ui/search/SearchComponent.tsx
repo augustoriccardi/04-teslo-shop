@@ -1,6 +1,5 @@
 "use client";
 
-import clsx from "clsx";
 import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { IoSearchOutline } from "react-icons/io5";
@@ -24,7 +23,7 @@ export const SearchComponent = ({ setIsSearchOpen, isSearchOpen }: any) => {
     return () => {
       clearTimeout(delayDebounceFn);
     };
-  }, [searchTerm, router, pathname, setIsSearchOpen]);
+  }, [searchTerm, router, setIsSearchOpen]);
 
   useEffect(() => {
     // setIsSearchOpen(false);
