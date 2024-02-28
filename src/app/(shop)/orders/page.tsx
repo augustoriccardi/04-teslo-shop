@@ -39,25 +39,25 @@ export default async function OrdersPage({ searchParams }: Props) {
             <tr>
               <th
                 scope="col"
-                className="text-sm font-medium text-gray-900 px-6 py-4 text-left"
+                className="text-sm font-medium text-gray-900 px-4 py-4 text-left"
               >
                 #ID
               </th>
               <th
                 scope="col"
-                className="text-sm font-medium text-gray-900 px-6 py-4 text-left"
+                className="text-sm font-medium text-gray-900 px-4 py-4 text-left"
               >
                 Nombre completo
               </th>
               <th
                 scope="col"
-                className="text-sm font-medium text-gray-900 px-6 py-4 text-left"
+                className="text-sm font-medium text-gray-900 px-4 py-4 text-left"
               >
                 Estado
               </th>
               <th
                 scope="col"
-                className="text-sm font-medium text-gray-900 px-6 py-4 text-left"
+                className="text-sm font-medium text-gray-900 px-4 py-4 text-left"
               >
                 Opciones
               </th>

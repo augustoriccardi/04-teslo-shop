@@ -44,7 +44,7 @@ export const Sidebar = () => {
       {/* Sidemenu*/}
       <nav
         className={clsx(
-          "fixed p-5 right-0 top-0 w-[375px] sm:w-[300px] h-screen bg-white z-20 shadow-2xl transform transition-all duration-300",
+          "fixed p-5 right-0 top-0  h-screen bg-white z-20 shadow-2xl transform transition-all duration-300",
           {
             "translate-x-full": !isSideMenuOpen,
           }
@@ -59,7 +59,7 @@ export const Sidebar = () => {
         {isAuthenticated && (
           <>
             <h1
-              className={`${titleFont.className} antialiased text-lg font-semibold my-6`}
+              className={`${titleFont.className} antialiased text-lg font-semibold my-2`}
             >
               Panel de usuario
             </h1>
@@ -76,7 +76,7 @@ export const Sidebar = () => {
             <Link
               onClick={() => closeSideMenu()}
               href="/orders"
-              className="flex items-center mt-2 p-2 hover:bg-gray-100 rounded transition-all"
+              className="flex items-center p-2 hover:bg-gray-100 rounded transition-all"
             >
               <IoTicketOutline size={25} />
               <span className="ml-3 text-lg">Mis ordenes</span>
@@ -87,7 +87,7 @@ export const Sidebar = () => {
           <Link
             onClick={() => closeSideMenu()}
             href="/auth/login"
-            className="flex items-center mt-2 p-2 hover:bg-gray-100 rounded transition-all"
+            className="flex items-center  p-2 hover:bg-gray-100 rounded transition-all"
           >
             <IoLogInOutline size={25} />
             <span className="ml-3 text-lg">Ingresar</span>
@@ -96,7 +96,7 @@ export const Sidebar = () => {
 
         {isAuthenticated && (
           <button
-            className="flex w-full items-center mt-2 p-2 hover:bg-gray-100 rounded transition-all"
+            className="flex w-full items-center p-2 hover:bg-gray-100 rounded transition-all"
             onClick={() => logout()}
           >
             <IoLogOutOutline size={25} />
@@ -107,7 +107,7 @@ export const Sidebar = () => {
         {isAdmin && (
           <>
             <h1
-              className={`${titleFont.className} antialiased text-lg font-semibold my-6`}
+              className={`${titleFont.className} antialiased text-lg font-semibold my-2`}
             >
               Panel de Admin
             </h1>
@@ -116,7 +116,7 @@ export const Sidebar = () => {
             <Link
               onClick={() => closeSideMenu()}
               href="/admin/products"
-              className="flex items-center mt-2 p-2 hover:bg-gray-100 rounded transition-all"
+              className="flex items-center mt-4 p-2 hover:bg-gray-100 rounded transition-all"
             >
               <IoShirtOutline size={25} />
               <span className="ml-3 text-lg">Productos</span>
@@ -125,7 +125,7 @@ export const Sidebar = () => {
             <Link
               onClick={() => closeSideMenu()}
               href="/admin/orders"
-              className="flex items-center mt-2 p-2 hover:bg-gray-100 rounded transition-all"
+              className="flex items-center  p-2 hover:bg-gray-100 rounded transition-all"
             >
               <IoTicketOutline size={25} />
               <span className="ml-3 text-lg">Todas las ordenes</span>
@@ -134,7 +134,7 @@ export const Sidebar = () => {
             <Link
               onClick={() => closeSideMenu()}
               href="/admin/users"
-              className="flex items-center mt-2 p-2 hover:bg-gray-100 rounded transition-all"
+              className="flex items-center  p-2 hover:bg-gray-100 rounded transition-all"
             >
               <IoPeopleOutline size={25} />
               <span className="ml-3 text-lg">Usuarios</span>
