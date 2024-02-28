@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 
 import Link from "next/link";
-import { IoCartOutline } from "react-icons/io5";
+import { IoCartOutline, IoSearchOutline } from "react-icons/io5";
 
 import { titleFont } from "@/config/fonts";
 import { useCartStore, useUIStore } from "@/store";
@@ -16,6 +16,7 @@ import { usePathname } from "next/navigation";
 export const TopMenu = () => {
   const openSideMenu = useUIStore((state) => state.openSideMenu);
   const totalItemsInCart = useCartStore((state) => state.getTotalItems());
+  const [isSearchOpen, setIsSearchOpen] = useState(false);
   const pathname = usePathname();
 
   // el useState y useEffect espera esta que se termine de renderizar la página para evitar el problema de hidratación o no concordancia de lo renderizado por el servidor vs cliente. Esperamos para mostar el totalItemsInCart.
@@ -62,8 +63,21 @@ export const TopMenu = () => {
         {/* Search, Cart, Menu */}
 
         <div className="flex items-center">
-          {(pathname === "/" || pathname.startsWith("/gender")) && (
-            <SearchComponent />
+          <div>
+            {(pathname === "/" || pathname.startsWith("/gender")) && (
+              <button
+                onClick={() => setIsSearchOpen(!isSearchOpen)}
+                className="z-200"
+              >
+                <IoSearchOutline size={20} />
+              </button>
+            )}
+          </div>
+          {isSearchOpen && (
+            <SearchComponent
+              isSearchOpen={isSearchOpen}
+              setIsSearchOpen={setIsSearchOpen}
+            />
           )}
 
           <div className="flex items-center">

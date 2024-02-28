@@ -5,9 +5,9 @@ import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { IoSearchOutline } from "react-icons/io5";
 
-export const SearchComponent = () => {
+export const SearchComponent = ({ setIsSearchOpen, isSearchOpen }: any) => {
   const router = useRouter();
-  const [isSearchOpen, setIsSearchOpen] = useState(true);
+
   const [searchTerm, setSearchTerm] = useState("");
   const [debouncedSearchTerm, setDebouncedSearchTerm] = useState("");
   const pathname = usePathname();
@@ -17,15 +17,17 @@ export const SearchComponent = () => {
       if (searchTerm === "") {
         return router.push(`${pathname}`);
       }
-
+      setIsSearchOpen(false);
       router.push(`${pathname}?search=${searchTerm}`);
     }, 1000);
 
-    return () => clearTimeout(delayDebounceFn);
+    return () => {
+      clearTimeout(delayDebounceFn);
+    };
   }, [searchTerm, router]);
 
   useEffect(() => {
-    setIsSearchOpen(false);
+    // setIsSearchOpen(false);
   }, [pathname]);
 
   const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -35,28 +37,35 @@ export const SearchComponent = () => {
   };
 
   return (
-    <div className="relative -left-5 -top-3 z-10">
-      <button
-        onClick={() => setIsSearchOpen(!isSearchOpen)}
-        className={clsx("transition-all ", {
-          absolute: !isSearchOpen,
-          "absolute -translate-x-[154px] z-10 translate-y-[49px]": isSearchOpen,
-        })}
-      >
-        <IoSearchOutline size={20} />
-      </button>
+    <div className="fixed inset-0 z-50 flex items-start justify-center pt-16 sm:pt-24">
+      {/* Blur*/}
+      {isSearchOpen && (
+        <div
+          onClick={() => setIsSearchOpen(!isSearchOpen)}
+          className="fixed inset-0 bg-slate-900/25 backdrop-blur transition-opacity opacity-100"
+        />
+      )}
 
-      <div className="absolute top-10 -left-40">
-        {isSearchOpen && (
-          <input
-            type="text"
-            placeholder="Buscar"
-            className="w-30 bg-gray-50 rounded pl-10 py-1 border-b-2 text-lg border-gray-200 focus:outline-none focus:border-blue-500 "
-            onChange={(e) => handleSearchChange(e)}
-            autoFocus
-          />
-        )}
-      </div>
+      {isSearchOpen && (
+        <div className="relative w-full max-w-lg transform px-4 transition-all opacity-100 scale-100">
+          <div className="overflow-hidden rounded-lg bg-white shadow-md">
+            <div className="relative">
+              <div>
+                <span className="pointer-events-none absolute right-4 top-4 h-6 w-6 fill-slate-400">
+                  <IoSearchOutline size={20} />
+                </span>
+                <input
+                  type="text"
+                  placeholder="Buscar"
+                  className="block w-full appearance-none bg-transparent py-4 pl-4 pr-12 text-base text-slate-900 placeholder:text-slate-600 focus:outline-none sm:text-lg sm:leading-6"
+                  onChange={(e) => handleSearchChange(e)}
+                  autoFocus
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
