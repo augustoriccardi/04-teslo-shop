@@ -60,12 +60,10 @@ export const createUpdateProduct = async (formData: FormData) => {
         const totalImages = imagesFormData.length + imagesDB.length;
 
         if (totalImages < 2) {
-          console.log("entro");
           throw new Error(
             "No se pudo actualizar el producto. Debe cargar un mínimo de 2 imágenes."
           );
         }
-
         product = await prisma.product.update({
           where: { id },
           data: {
@@ -79,7 +77,7 @@ export const createUpdateProduct = async (formData: FormData) => {
           },
         });
 
-        console.log({ updatedProduct: product });
+        // console.log({ updatedProduct: product });
       } else {
         // Crear producto
         if (imagesFormData.length < 2) {
@@ -88,7 +86,6 @@ export const createUpdateProduct = async (formData: FormData) => {
             "No se pudo guardar el producto. Debe cargar un mínimo de 2 imágenes."
           );
         }
-
         product = await prisma.product.create({
           data: {
             ...rest,
@@ -98,22 +95,22 @@ export const createUpdateProduct = async (formData: FormData) => {
             },
           },
         });
-
-        // Proceso de carga y guardado de imágenes
-        // Recorrer las imágenes y guardarlas
-        const images = await uploadImages(imagesFormData as File[]);
-
-        if (!images) {
-          throw new Error("No se pudo cargar las imágenes, rollingback");
-        }
-
-        await prisma.productImage.createMany({
-          data: images.map((image) => ({
-            url: image!,
-            productId: product.id,
-          })),
-        });
       }
+
+      // Proceso de carga y guardado de imágenes
+      // Recorrer las imágenes y guardarlas
+      const images = await uploadImages(imagesFormData as File[]);
+
+      if (!images) {
+        throw new Error("No se pudo cargar las imágenes, rollingback");
+      }
+
+      await prisma.productImage.createMany({
+        data: images.map((image) => ({
+          url: image!,
+          productId: product.id,
+        })),
+      });
 
       return {
         product,

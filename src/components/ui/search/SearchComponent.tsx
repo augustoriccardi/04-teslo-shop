@@ -24,7 +24,7 @@ export const SearchComponent = ({ setIsSearchOpen, isSearchOpen }: any) => {
     return () => {
       clearTimeout(delayDebounceFn);
     };
-  }, [searchTerm, router]);
+  }, [searchTerm, router, pathname, setIsSearchOpen]);
 
   useEffect(() => {
     // setIsSearchOpen(false);

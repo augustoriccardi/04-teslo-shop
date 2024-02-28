@@ -118,11 +118,6 @@ export const ProductForm = ({ product, categories, slug }: Props) => {
 
       // Restablecer el valor del campo de imágenes después de la actualización exitosa
       setValue("images", undefined);
-
-      setTimeout(
-        () => router.replace(`/admin/product/${updatedProduct?.slug}`),
-        3000
-      );
     }
   };
 
