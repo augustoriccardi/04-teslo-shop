@@ -44,7 +44,7 @@ export const Sidebar = () => {
       {/* Sidemenu*/}
       <nav
         className={clsx(
-          "fixed p-5 right-0 top-0  h-screen bg-white z-20 shadow-2xl transform transition-all duration-300",
+          "fixed p-5 right-0 top-0  h-screen bg-white z-20 shadow-2xl transform transition-all duration-300 sm:w-[300px]",
           {
             "translate-x-full": !isSideMenuOpen,
           }
@@ -57,7 +57,7 @@ export const Sidebar = () => {
         />
 
         {isAuthenticated && (
-          <>
+          <div className="pt-7">
             <h1
               className={`${titleFont.className} antialiased text-lg font-semibold my-2`}
             >
@@ -81,13 +81,13 @@ export const Sidebar = () => {
               <IoTicketOutline size={25} />
               <span className="ml-3 text-lg">Mis ordenes</span>
             </Link>
-          </>
+          </div>
         )}
         {!isAuthenticated && (
           <Link
             onClick={() => closeSideMenu()}
             href="/auth/login"
-            className="flex items-center  p-2 hover:bg-gray-100 rounded transition-all"
+            className="flex items-center mt-7 p-2 hover:bg-gray-100 rounded transition-all"
           >
             <IoLogInOutline size={25} />
             <span className="ml-3 text-lg">Ingresar</span>
