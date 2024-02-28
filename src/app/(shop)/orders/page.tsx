@@ -30,7 +30,7 @@ export default async function OrdersPage({ searchParams }: Props) {
   }
 
   return (
-    <div className="">
+    <div>
       <Title title="Orders" />
 
       <div className="mb-10">
