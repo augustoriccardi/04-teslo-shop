@@ -12,6 +12,7 @@ import {
 } from "react-icons/io5";
 import clsx from "clsx";
 import { newUserSchema } from "@/utils";
+import Link from "next/link";
 
 type formInputs = {
   name: string;
@@ -48,7 +49,7 @@ export const RegisterForm = () => {
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="flex flex-col shadow px-4 py-6 rounded-xl w-[300px]"
+      className="flex flex-col shadow px-4 py-6 rounded-xl max-w-[300px]"
     >
       <div className="relative">
         <input
@@ -165,6 +166,12 @@ export const RegisterForm = () => {
           </p>
         </div>
       )}
+      <Link
+        href="/auth/login"
+        className=" underline flex justify-end text-blue-500  text-md mt-6"
+      >
+        Already have an account?
+      </Link>
     </form>
   );
 };

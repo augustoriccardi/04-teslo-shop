@@ -35,7 +35,7 @@ export const LoginForm = () => {
 
   // los inputs para que se pasen a formData tienen que tener el "name". El dispatch ejecuta la función authenticate que tiene como argumento a formData.
   return (
-    <div className="flex flex-col shadow px-4 py-6 rounded-xl w-[300px]">
+    <div className="flex flex-col shadow px-4 py-6 rounded-xl max-w-[300px]">
       <form action={dispatch}>
         <div className="relative">
           <input
@@ -128,7 +128,7 @@ export const LoginForm = () => {
         href="/auth/new-account"
         className=" underline flex justify-end text-blue-500  text-md "
       >
-        Sign Up
+        Sign in
       </Link>
     </div>
   );
