@@ -23,25 +23,12 @@ export const productSchema = z.object({
   slug: z.string().min(1, { message: "El slug es obligatorio" }),
   description: z.string().min(1, { message: "La descripción es obligatoria" }),
   price: z
-    .string()
-    .refine(
-      (data) => {
-        const numberValue = Number(data);
-        return numberValue >= 0;
-      },
-      { message: "El precio debe ser un número positivo." }
-    )
-    .default("1"),
+    .number()
+    .positive({ message: "El precio debe ser un número positivo" }),
+
   inStock: z
-    .string()
-    .refine(
-      (data) => {
-        const numberValue = Number(data);
-        return numberValue >= 0;
-      },
-      { message: "La cantidad en stock debe ser un número positivo." }
-    )
-    .default("1"),
+    .number()
+    .positive({ message: "Cantidad en stock debe ser un número positivo" }),
   sizes: z.array(z.string()).refine((data) => data.length > 0, {
     message: "Seleccione al menos un tamaño",
   }),
