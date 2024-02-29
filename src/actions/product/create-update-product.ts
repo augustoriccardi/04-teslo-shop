@@ -61,7 +61,7 @@ export const createUpdateProduct = async (formData: FormData) => {
 
         if (totalImages < 2) {
           throw new Error(
-            "No se pudo actualizar el producto. Debe cargar un mínimo de 2 imágenes."
+            "No es posible actualizar un producto sin adjuntar un mínimo de 2 imágenes."
           );
         }
         product = await prisma.product.update({
@@ -83,7 +83,7 @@ export const createUpdateProduct = async (formData: FormData) => {
         if (imagesFormData.length < 2) {
           console.log("entro");
           throw new Error(
-            "No se pudo guardar el producto. Debe cargar un mínimo de 2 imágenes."
+            "No es posible crear un producto sin adjuntar un mínimo de 2 imágenes."
           );
         }
         product = await prisma.product.create({

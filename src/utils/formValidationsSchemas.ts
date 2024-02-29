@@ -17,3 +17,38 @@ export const newUserSchema = z.object({
     .string()
     .min(6, { message: "Escriba una contraseña de 6 caracteres mínimo" }),
 });
+
+export const productSchema = z.object({
+  title: z.string().min(1, { message: "El título es obligatorio" }),
+  slug: z.string().min(1, { message: "El slug es obligatorio" }),
+  description: z.string().min(1, { message: "La descripción es obligatoria" }),
+  price: z
+    .string()
+    .refine(
+      (data) => {
+        const numberValue = Number(data);
+        return numberValue >= 0;
+      },
+      { message: "El precio debe ser un número positivo." }
+    )
+    .default("1"),
+  inStock: z
+    .string()
+    .refine(
+      (data) => {
+        const numberValue = Number(data);
+        return numberValue >= 0;
+      },
+      { message: "La cantidad en stock debe ser un número positivo." }
+    )
+    .default("1"),
+  sizes: z.array(z.string()).refine((data) => data.length > 0, {
+    message: "Seleccione al menos un tamaño",
+  }),
+  tags: z.string().min(1, { message: "Tags no puede estar vacío" }),
+  gender: z
+    .enum(["men", "women", "kid", "unisex"])
+    .refine((data) => data !== undefined, { message: "Seleccione un género" }),
+  categoryId: z.string().min(1, { message: "La categoría es obligatoria" }),
+  images: z.any(), // Images will be validated later  on the server side
+});

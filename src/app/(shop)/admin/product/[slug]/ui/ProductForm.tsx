@@ -12,7 +12,9 @@ import {
 import clsx from "clsx";
 import { useForm } from "react-hook-form";
 import { Toaster, toast } from "sonner";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { productSchema } from "@/utils";
 
 interface Props {
   product: Partial<Product> & { ProductImage?: ProductWithImage[] };
@@ -44,7 +46,7 @@ export const ProductForm = ({ product, categories, slug }: Props) => {
   const {
     handleSubmit,
     register,
-    formState: { isValid },
+    formState: { isValid, errors },
     getValues,
     setValue,
     watch,
@@ -56,6 +58,7 @@ export const ProductForm = ({ product, categories, slug }: Props) => {
 
       images: undefined,
     },
+    resolver: zodResolver(productSchema),
   });
 
   //Cuando cambia "sizes" se actualizan los datos del formulario
@@ -74,6 +77,29 @@ export const ProductForm = ({ product, categories, slug }: Props) => {
     // Actualizar el estado con el Set de tamaños modificado, convirtiéndolo de nuevo a un array pasándole el set
     setValue("sizes", Array.from(sizes));
   };
+
+  useEffect(() => {
+    if (errors) {
+      const errorMessages = Object.keys(errors).map((fieldName) => ({
+        field: fieldName,
+        message: (errors[fieldName as keyof FormInputs] as any)?.message,
+      }));
+
+      // Mostrar un solo toast con un <ul> que contiene claves y mensajes de error
+      if (errorMessages.length > 0) {
+        const errorsList = (
+          <ul>
+            {errorMessages.map((error, index) => (
+              <li key={index}>
+                <strong>{error.field}:</strong> {error.message}
+              </li>
+            ))}
+          </ul>
+        );
+        toast.warning(errorsList);
+      }
+    }
+  }, [errors]);
 
   const onSubmit = async (data: FormInputs) => {
     const formData = new FormData();
@@ -116,6 +142,11 @@ export const ProductForm = ({ product, categories, slug }: Props) => {
 
       toast.success(successMessage);
 
+      setTimeout(
+        () => router.replace(`/admin/product/${updatedProduct?.slug}`),
+        1000
+      );
+
       // Restablecer el valor del campo de imágenes después de la actualización exitosa
       setValue("images", undefined);
     }
@@ -123,7 +154,7 @@ export const ProductForm = ({ product, categories, slug }: Props) => {
 
   return (
     <>
-      <Toaster position="top-right" richColors />
+      <Toaster position="top-right" richColors closeButton />
       <form
         onSubmit={handleSubmit(onSubmit)}
         className="grid px-5 mb-16 grid-cols-1 sm:px-0 sm:grid-cols-2 gap-3"

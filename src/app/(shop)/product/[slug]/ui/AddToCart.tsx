@@ -43,7 +43,7 @@ export const AddToCart = ({ product }: Props) => {
 
   return (
     <>
-      <Toaster position="top-right" richColors />
+      <Toaster position="bottom-right" richColors />
       {posted && !size && (
         <span className="mt-2 text-red-500 fade-in">
           Debe de seleccionar una talla
