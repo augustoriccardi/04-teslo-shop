@@ -1,12 +1,9 @@
 import Image from "next/image";
 
 import { IsPaidFlag, Title } from "@/components";
-import { IoCardOutline } from "react-icons/io5";
-import clsx from "clsx";
 import { getOrderById } from "@/actions";
 import { redirect } from "next/navigation";
 import { currencyFormat } from "@/utils/currencyFormat";
-import OrderIdErrorPage from "./error";
 import { PayPalButton } from "@/components/paypal/PayPalButton";
 import Link from "next/link";
 
@@ -94,11 +91,13 @@ export default async function OrdersById({ params }: Props) {
                 {currencyFormat(order!.subTotal)}
               </span>
 
-              <span>Impuestos (15%)</span>
+              <span>Impuestos (22%)</span>
               <span className="text-right"> {currencyFormat(order!.tax)}</span>
 
               <span className="mt-5 text-2xl">Total:</span>
-              <span className="mt-5 text-2xl text-right">$ {order?.total}</span>
+              <span className="mt-5 text-2xl text-right">
+                $ {currencyFormat(order!.total)}
+              </span>
             </div>
 
             {order?.isPaid ? (
