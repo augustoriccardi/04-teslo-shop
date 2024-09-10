@@ -21,6 +21,15 @@ export const setUserAddress = async (address: Address, userId: string) => {
 
 const createOrReplaceAddress = async (address: Address, userId: string) => {
   try {
+    // Verifica si el usuario existe
+    const user = await prisma.user.findUnique({
+      where: { id: userId },
+    });
+
+    if (!user) {
+      throw new Error(`User with ID ${userId} does not exist`);
+    }
+
     const storedAddress = await prisma.userAddress.findUnique({
       where: { userId },
     });
