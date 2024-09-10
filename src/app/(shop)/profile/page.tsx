@@ -7,7 +7,7 @@ export default async function ProfilePage() {
     <div>
       <Title title="Perfil" />
 
-      <div className="max-w-[700px] my-6 border rounded shadow border-gray-300 p-2">
+      <div className="my-6 border rounded shadow border-gray-300 p-2">
         <div className="px-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
           <dt className="text-sm font-medium leading-6 text-gray-900">
             Nombre completo
