@@ -81,7 +81,6 @@ export const createUpdateProduct = async (formData: FormData) => {
       } else {
         // Crear producto
         if (imagesFormData.length < 2) {
-          console.log("entro");
           throw new Error(
             "No es posible crear un producto sin adjuntar un mínimo de 2 imágenes."
           );

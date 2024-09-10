@@ -28,7 +28,7 @@ export const PayPalButton = ({ orderId, amount }: Props) => {
     );
   }
 
-  //Cuando haog click en el botón se crea la orden en Paypal
+  //Cuando hago click en el botón se crea la orden en Paypal
   const createOrder = async (
     data: CreateOrderData,
     actions: CreateOrderActions

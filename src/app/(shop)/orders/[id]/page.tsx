@@ -96,7 +96,7 @@ export default async function OrdersById({ params }: Props) {
 
               <span className="mt-5 text-2xl">Total:</span>
               <span className="mt-5 text-2xl text-right">
-                $ {currencyFormat(order!.total)}
+                {currencyFormat(order!.total)}
               </span>
             </div>
 

@@ -63,7 +63,7 @@ export const ProductForm = ({ product, categories, slug }: Props) => {
 
   // Función para manejar cambios en el array "sizes"
   const onSizeChanged = (size: string) => {
-    // Obtener los valores actuales de "sizes" y convertirlos en un Set (métodos del set son "has", "delte", "add")
+    // Obtener los valores actuales de "sizes" y convertirlos en un Set (métodos del set son "has", "delete", "add")
     const sizes = new Set(getValues("sizes"));
     // console.log(sizes);
     if (sizes.has(size)) {

@@ -29,6 +29,7 @@ interface Props {
   userDbAddress?: Partial<UserAddress>;
 }
 
+//Recibe countries y userDBAdress de la action getUserAddress de la page.
 export const AdressForm = ({ countries, userDbAddress = {} }: Props) => {
   const {
     id, // No se usará
@@ -38,6 +39,7 @@ export const AdressForm = ({ countries, userDbAddress = {} }: Props) => {
   } = userDbAddress;
   const router = useRouter();
 
+  //Uso de React Hook form, inicializando el formulario con los valores del restUserDbAddress y desestrucutrando para dejar rememberAddress en false.
   const {
     handleSubmit,
     register,
@@ -50,20 +52,24 @@ export const AdressForm = ({ countries, userDbAddress = {} }: Props) => {
     },
   });
 
+  // Función de la store para el set de la adress
   const setAddress = useAddressStore((state) => state.setAddress);
+  // Estado de address
   const address = useAddressStore((state) => state.address);
 
+  // Lo voy a usar para mandarle a deleteUserAddress el usuario logueado par que elimine la direccion de la DB.
   const { data: session } = useSession({
     required: true,
   });
 
-  // Este useEffect resetea los valores del formulario con los valores de "adress" para que cuando se recarge la página persistan los datos
+  // Este useEffect resetea los valores del formulario con los valores de "adress" para que cuando se recarge la página persistan los datos.
   useEffect(() => {
     if (address.firstName) {
       reset(address);
     }
   }, [address, reset]);
 
+  // Toma la data del formulario actualizado y en caso de que se quiera recordar la dirección se llama a setUserAdress (crea o reemplaza los datos en la DB), en caso que no se quiera recordar manda a llamar a deleteUserAddress para borrar de la DB.
   const onSubmit = async (data: FormInputs) => {
     const { rememberAddress, ...restAddress } = data;
 
